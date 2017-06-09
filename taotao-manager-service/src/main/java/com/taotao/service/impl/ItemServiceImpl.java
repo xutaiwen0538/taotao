@@ -1,5 +1,6 @@
 package com.taotao.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,12 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EasyUIDataGridResult;
+import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.common.utils.IDUtils;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
+import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemService;
 
@@ -49,6 +53,33 @@ public class ItemServiceImpl implements ItemService {
 		
 		return result;
 	}
+
+
+
+	@Override
+	public TaotaoResult addItem(TbItem item, String desc) {
+		final long id = IDUtils.genItemId();
+		item.setId(id);
+		item.setCreated(new Date());
+		item.setStatus((byte) 1);
+		item.setUpdated(new Date());
+		itemMapper.insert(item);
+		TbItemDesc itemDesc = new TbItemDesc();
+		itemDesc.setItemId(id);
+		itemDesc.setItemDesc(desc);
+		itemDesc.setCreated(new Date());
+		itemDesc.setUpdated(new Date());
+		//插入商品描述
+		itemDescMapper.insert(itemDesc);
+		return TaotaoResult.ok();
+	}
+
+
+
+
+
+
+	
 
 	
 	

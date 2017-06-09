@@ -30,11 +30,11 @@ public class ItemController {
 		return result;
 	}
 	
-	/*@RequestMapping("/item/save")
+	@RequestMapping("/item/save")
 	@ResponseBody
 	public TaotaoResult addItem(TbItem item, String desc) {
 		TaotaoResult result = itemService.addItem(item, desc);
 		return result;
 	}
-	*/
+	
 }

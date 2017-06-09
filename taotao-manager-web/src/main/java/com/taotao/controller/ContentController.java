@@ -18,10 +18,10 @@ import com.taotao.service.ItemService;
  * @version 1.0
  */
 @Controller
-public class ItemController {
+public class ContentController {
 
-	@Autowired
-	private ItemService itemService;
+/*	@Autowired
+	private ContentService contentService;
 	
 	@RequestMapping("/item/list")
 	@ResponseBody
@@ -29,7 +29,7 @@ public class ItemController {
 		EasyUIDataGridResult result = itemService.getItemList(page, rows);
 		return result;
 	}
-	
+	*/
 	/*@RequestMapping("/item/save")
 	@ResponseBody
 	public TaotaoResult addItem(TbItem item, String desc) {

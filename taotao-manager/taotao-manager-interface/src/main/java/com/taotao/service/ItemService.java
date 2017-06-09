@@ -8,5 +8,7 @@ import com.taotao.pojo.TbItemDesc;
 public interface ItemService {
 
 	EasyUIDataGridResult getItemList(int page, int rows);
+
+	TaotaoResult addItem(TbItem item, String desc);
 	
 }

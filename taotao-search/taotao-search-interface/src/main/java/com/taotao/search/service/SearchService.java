@@ -1,0 +1,10 @@
+package com.taotao.search.service;
+
+import com.taotao.common.pojo.SearchResult;
+
+
+public interface SearchService {
+
+	SearchResult search(String queryString, Integer page, Integer iTEM_ROWS) throws Exception ;
+
+}

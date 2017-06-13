@@ -1,9 +1,15 @@
 package com.taotao.search.service.impl;
 
+import java.util.List;
+
 import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.taotao.common.pojo.SearchItem;
+import com.taotao.common.pojo.SearchResult;
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.search.mapper.ItemMapper;
 import com.taotao.search.service.SearchItemService;
 
@@ -21,8 +27,9 @@ public class SearchItemServiceImpl implements SearchItemService {
 	private SolrServer solrServer;
 	@Autowired
 	private ItemMapper itemMapper;
-	//public TaotaoResult importAllItemToIndex() throws Exception{
-		/*// 1、查询所有商品数据。
+	@Override
+	public TaotaoResult importAllItemToIndex() throws Exception{
+		// 1、查询所有商品数据。
 		List<SearchItem> itemList = itemMapper.getItemList();
 		// 2、创建一个SolrServer对象。
 		for (SearchItem searchItem : itemList) {
@@ -42,6 +49,8 @@ public class SearchItemServiceImpl implements SearchItemService {
 		//提交
 		solrServer.commit();
 		// 6、返回TaotaoResult。
-		return TaotaoResult.ok();*/
+		return TaotaoResult.ok();
+	}
+	
 
 }

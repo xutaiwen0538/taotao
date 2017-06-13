@@ -1,8 +1,19 @@
 package com.taotao.search.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.taotao.common.pojo.SearchItem;
+import com.taotao.common.pojo.SearchResult;
 
 /**
  * 商品搜索dao
@@ -17,8 +28,8 @@ public class ItemSearchDao {
 	@Autowired
 	private SolrServer solrServer;
 	
-	//public SearchResult search(SolrQuery query) throws Exception {
-		/*//根据Query对象查询索引库
+	public SearchResult search(SolrQuery query) throws Exception {
+		//根据Query对象查询索引库
 		QueryResponse response = solrServer.query(query);
 		//取查询结果
 		SolrDocumentList solrDocumentList = response.getResults();
@@ -50,5 +61,6 @@ public class ItemSearchDao {
 		result.setItemList(itemList);
 		//返回结果
 		return result;
-	}*/
+	}
+	
 }

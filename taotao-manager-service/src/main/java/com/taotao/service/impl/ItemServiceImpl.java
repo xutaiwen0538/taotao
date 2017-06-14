@@ -3,7 +3,17 @@ package com.taotao.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.jms.Topic;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -33,6 +43,16 @@ public class ItemServiceImpl implements ItemService {
 	private TbItemMapper itemMapper;
 	@Autowired
 	private TbItemDescMapper itemDescMapper;
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
+	@Resource(name="topicDestination")
+	private Topic topicDestination;
+	
+	@Value("${REDIS_ITEM_KEY}")
+	private String REDIS_ITEM_KEY;
+	@Value("${REDIS_ITEM_EXPIRE}")
+	private Integer REDIS_ITEM_EXPIRE;
 	
 	
 
@@ -71,6 +91,15 @@ public class ItemServiceImpl implements ItemService {
 		itemDesc.setUpdated(new Date());
 		//插入商品描述
 		itemDescMapper.insert(itemDesc);
+		jmsTemplate.send(topicDestination,new MessageCreator() {
+			
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				TextMessage message = session.createTextMessage(id + "");
+				
+				return message;
+			}
+		});
 		return TaotaoResult.ok();
 	}
 
